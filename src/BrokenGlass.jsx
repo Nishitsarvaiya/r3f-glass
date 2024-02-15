@@ -5,10 +5,10 @@ import { DoubleSide } from "three";
 
 const BrokenGlass = () => {
 	const { viewport } = useThree();
-	const { nodes } = useGLTF("/models/broken-glass-5.glb");
+	const { nodes } = useGLTF("/models/broken-glass.glb");
 
 	return (
-		<group position={[0, -0.75, 0]} scale={viewport.width * 2}>
+		<group scale={viewport.width * 2.2}>
 			{nodes.Scene.children.map((shard) => (
 				<Shard data={shard} key={shard.uuid} />
 			))}

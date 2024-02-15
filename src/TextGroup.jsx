@@ -8,7 +8,7 @@ const TextGroup = () => {
 		<group>
 			<Text
 				font="/ClashDisplay-Medium.ttf"
-				fontSize={0.4}
+				fontSize={viewport.width * 0.24}
 				anchorX="center"
 				anchorY="middle"
 				textAlign="center"
@@ -18,11 +18,11 @@ const TextGroup = () => {
 			</Text>
 			<Text
 				font="/ClashDisplay-Regular.ttf"
-				fontSize={0.03}
+				fontSize={viewport.width > 2 ? 0.03 : 0.018}
 				anchorX="center"
-				anchorY="middle"
+				anchorY="top"
 				color="white"
-				position={[0, -0.22, -0.1]}
+				position={[0, viewport.width > 2 ? -0.26 : -0.24, -0.1]}
 				textAlign="center">
 				This link is broken
 			</Text>
