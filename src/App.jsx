@@ -16,7 +16,7 @@ function App() {
 				toneMapping: ACESFilmicToneMapping,
 				toneMappingExposure: 1,
 			}}>
-			<OrbitControls enableDamping />
+			{/* <OrbitControls enableDamping /> */}
 			<directionalLight position={[0, 0.1, 1]} intensity={3} />
 			<Environment preset="city" />
 			<World />
