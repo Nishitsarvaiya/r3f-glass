@@ -1,7 +1,6 @@
 import { Float, MeshTransmissionMaterial, useGLTF } from "@react-three/drei";
 import { useThree } from "@react-three/fiber";
 import { useControls } from "leva";
-import { DoubleSide } from "three";
 
 const BrokenGlass = () => {
 	const { viewport } = useThree();
@@ -24,7 +23,7 @@ const Shard = ({ data }) => {
 			max: 1,
 			step: 0.01,
 		},
-		resolution: 256,
+		resolution: 64,
 		thickness: {
 			value: 0.06,
 			min: 0,
@@ -69,6 +68,7 @@ const Shard = ({ data }) => {
 					chromaticAberration={chromaticAberration}
 					thickness={thickness}
 					resolution={resolution}
+					clearcoat={1}
 				/>
 			</mesh>
 		</Float>
