@@ -1,5 +1,5 @@
-import BrokenGlass from './BrokenGlass';
-import TextGroup from './TextGroup';
+import BrokenGlass from "./BrokenGlass";
+import TextGroup from "./TextGroup";
 
 const World = () => {
 	return (

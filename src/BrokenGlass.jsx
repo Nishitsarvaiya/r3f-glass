@@ -1,13 +1,14 @@
-import { Float, MeshTransmissionMaterial, useGLTF } from '@react-three/drei';
-import { useThree } from '@react-three/fiber';
-import { DoubleSide } from 'three';
+import { Float, MeshTransmissionMaterial, useGLTF } from "@react-three/drei";
+import { useThree } from "@react-three/fiber";
+import { useControls } from "leva";
+import { DoubleSide } from "three";
 
 const BrokenGlass = () => {
 	const { viewport } = useThree();
-	const { nodes } = useGLTF('/models/broken-glass-2.glb');
+	const { nodes } = useGLTF("/models/broken-glass-5.glb");
 
 	return (
-		<group scale={viewport.width * 1.2} position={[0, 0, 1]}>
+		<group position={[0, -0.75, 0]} scale={viewport.width * 2}>
 			{nodes.Scene.children.map((shard) => (
 				<Shard data={shard} key={shard.uuid} />
 			))}
@@ -16,19 +17,58 @@ const BrokenGlass = () => {
 };
 
 const Shard = ({ data }) => {
+	const { transmission, resolution, reflectivity, thickness, ior, roughness, chromaticAberration } = useControls({
+		transmission: {
+			value: 0.99,
+			min: 0,
+			max: 1,
+			step: 0.01,
+		},
+		resolution: 256,
+		thickness: {
+			value: 0.06,
+			min: 0,
+			max: 0.1,
+			step: 0.01,
+		},
+		ior: {
+			value: 1.82,
+			min: 0,
+			max: 3,
+			step: 0.01,
+		},
+		roughness: {
+			value: 0,
+			min: 0,
+			max: 1,
+			step: 0.01,
+		},
+		chromaticAberration: {
+			value: 0.75,
+			min: 0,
+			max: 3,
+			step: 0.01,
+		},
+		reflectivity: {
+			value: 0.5,
+			min: 0,
+			max: 1,
+			step: 0.01,
+		},
+	});
+
 	return (
-		<Float floatingRange={[0, 0.2]} floatIntensity={0.05}>
+		<Float frustumCulled floatIntensity={0.36} floatingRange={[0.1, 0.2]}>
 			<mesh {...data}>
 				{/* <meshBasicMaterial /> */}
 				<MeshTransmissionMaterial
-					transmission={1}
-					resolution={300}
-					thickness={0.54}
-					ior={1.6}
-					chromaticAberration={0.03}
-					roughness={0.12}
-					metalness={0.1}
-					side={DoubleSide}
+					transmission={transmission}
+					roughness={roughness}
+					ior={ior}
+					reflectivity={reflectivity}
+					chromaticAberration={chromaticAberration}
+					thickness={thickness}
+					resolution={resolution}
 				/>
 			</mesh>
 		</Float>
